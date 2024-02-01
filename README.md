@@ -16,4 +16,5 @@ Transistor Outputs
 DIN-Rail mount
 Supports Expansion port
 
-
+Datasheet:   https://drive.google.com/open?id=1AAePBadVfCiXFN5CCQOC06MW4ylUyMHA&usp=drive_fs
+User Guide:  https://drive.google.com/open?id=1bDuZoxrOIGTjOPZG7QEKbCFFg-xIjg8c&usp=drive_fs
