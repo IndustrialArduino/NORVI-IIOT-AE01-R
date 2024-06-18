@@ -45,22 +45,18 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 int analog_value = 0;
 
 int readSwitch(){
-  analog_value = analogRead(ANALOG_PIN_0);
-
- 
-  return analog_value                                                                                                ; //Read analog
+  analog_value = analogRead(ANALOG_PIN_0); 
+  return analog_value; //Read analog
 }
-
 // ================================================ SETUP ================================================
 void setup() {
- 
   Serial.begin(9600);
   Serial.println("Hello");
  
- pinMode(RS485_FC, OUTPUT); 
- digitalWrite(RS485_FC, HIGH);
+  pinMode(RS485_FC, OUTPUT); 
+  digitalWrite(RS485_FC, HIGH);
 
- Serial1.begin(9600, SERIAL_8N1,RS485_RXD,RS485_TXD);
+  Serial1.begin(9600, SERIAL_8N1,RS485_RXD,RS485_TXD);
   digitalWrite(RS485_FC, HIGH);   // RS-485
   
   pinMode(OUTPUT1, OUTPUT);
@@ -80,7 +76,6 @@ void setup() {
   pinMode(INPUT6, INPUT);
   pinMode(INPUT7, INPUT);
   pinMode(INPUT8, INPUT);
-
   
   Wire.begin(16,17);
 
@@ -91,23 +86,23 @@ void setup() {
   display.display();
 
   adcAttachPin(32);
-
- 
-
-  
 }
 
-
 void loop() {
+  Serial.println(""); 
+  Serial.print(digitalRead(INPUT1));
+  Serial.print(digitalRead(INPUT2));
+  Serial.print(digitalRead(INPUT3));
+  Serial.print(digitalRead(INPUT4));
+  Serial.print(digitalRead(INPUT5));
+  Serial.print(digitalRead(INPUT6));
+  Serial.print(digitalRead(INPUT7));
+  Serial.print(digitalRead(INPUT8));
+  Serial.println(""); 
  
+  Serial.print("Push button  ");
+  Serial.println(readSwitch());
   Serial.println(""); 
-  Serial.print(digitalRead(INPUT1));Serial.print(digitalRead(INPUT2));Serial.print(digitalRead(INPUT3));Serial.println(digitalRead(INPUT4));Serial.print(digitalRead(INPUT5));Serial.print(digitalRead(INPUT6));Serial.print(digitalRead(INPUT7));Serial.println(digitalRead(INPUT8));
-  Serial.println(""); 
-
- 
-  Serial.print("Push button  ");Serial.println(readSwitch());
-  Serial.println(""); 
-
   
   digitalWrite(OUTPUT1, HIGH);
   digitalWrite(OUTPUT2, LOW);
@@ -182,12 +177,11 @@ void loop() {
   digitalWrite(OUTPUT8, HIGH);
   delay(200);
   
-digitalWrite(RS485_FC, HIGH);                    // Make FLOW CONTROL pin HIGH
+  digitalWrite(RS485_FC, HIGH);                    // Make FLOW CONTROL pin HIGH
   delay(500);
   Serial1.println(F("RS485 01 SUCCESS"));    // Send RS485 SUCCESS serially
   delay(500);                                // Wait for transmission of data
   digitalWrite(RS485_FC, LOW) ;                    // Receiving mode ON
-
                                              // Serial1.flush() ;
   delay(1000);     
   
@@ -195,5 +189,4 @@ digitalWrite(RS485_FC, HIGH);                    // Make FLOW CONTROL pin HIGH
     char c = Serial1.read();     // Read data from RS485
     Serial.write(c);             // Print data on serial monitor
   }
- 
-}
+ }
