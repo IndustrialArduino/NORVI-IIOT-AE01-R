@@ -1,9 +1,7 @@
-
 /*
  * RS485
  * All Output Turn ON Series
  * All input status serial print
- 
  */
 
 #include <SPI.h>
@@ -43,7 +41,6 @@
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 int analog_value = 0;
-
 int readSwitch(){
   analog_value = analogRead(ANALOG_PIN_0); 
   return analog_value; //Read analog
@@ -52,10 +49,8 @@ int readSwitch(){
 void setup() {
   Serial.begin(9600);
   Serial.println("Hello");
- 
   pinMode(RS485_FC, OUTPUT); 
   digitalWrite(RS485_FC, HIGH);
-
   Serial1.begin(9600, SERIAL_8N1,RS485_RXD,RS485_TXD);
   digitalWrite(RS485_FC, HIGH);   // RS-485
   
@@ -78,13 +73,11 @@ void setup() {
   pinMode(INPUT8, INPUT);
   
   Wire.begin(16,17);
-
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3D for 128x64
     Serial.println(F("SSD1306 allocation failed"));
     for(;;); // Don't proceed, loop forever
   }
   display.display();
-
   adcAttachPin(32);
 }
 
@@ -181,10 +174,9 @@ void loop() {
   delay(500);
   Serial1.println(F("RS485 01 SUCCESS"));    // Send RS485 SUCCESS serially
   delay(500);                                // Wait for transmission of data
-  digitalWrite(RS485_FC, LOW) ;                    // Receiving mode ON
-                                             // Serial1.flush() ;
+  digitalWrite(RS485_FC, LOW) ;                    // Receiving mode ON                                       
   delay(1000);     
-  
+ 
   while (Serial1.available()) {  // Check if data is available
     char c = Serial1.read();     // Read data from RS485
     Serial.write(c);             // Print data on serial monitor
